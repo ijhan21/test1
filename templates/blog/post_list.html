@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}글 목록{% endblock %}
+
+{% block content %}
+<h2>📚 전체 글 목록</h2>
+
+{% if posts %}
+    {% for post in posts %}
+    <div class="post">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+        
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="post-image">
+        {% else %}
+        <p style="color: #999;">📷 이미지 없음</p>
+        {% endif %}
+        
+        <div class="post-meta">
+            📅 {{ post.created_at|date:"Y-m-d H:i" }}
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="post">
+        <p>아직 작성된 글이 없습니다. 첫 글을 작성해보세요!</p>
+    </div>
+{% endif %}
+{% endblock %}
